@@ -5,7 +5,6 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.function.Consumer;
 
-import com.google.gson.stream.JsonWriter;
 
 public class Converter2 {
 
@@ -47,8 +46,7 @@ public class Converter2 {
   }
 
   private String encodeString(final Object obj) {
-    new JsonWriter();
-    return null;
+     return null;
   }
 
   private void write(final Consumer<Property> target, final String key, final String value) {
