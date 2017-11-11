@@ -6,9 +6,9 @@ import java.io.StringReader;
 import java.util.Properties;
 import java.util.function.Consumer;
 
-import com.github.gv2011.jsoncore.JsonFactory;
-import com.github.gv2011.jsoncore.JsonParser;
-import com.github.gv2011.jsoncore.JsonToken;
+import com.github.gv2011.gsoncore.JsonFactory;
+import com.github.gv2011.gsoncore.JsonParser;
+import com.github.gv2011.gsoncore.JsonToken;
 
 
 public class Converter {
@@ -27,7 +27,7 @@ public class Converter {
   }
 
   public void toProperties(final JsonParser json, final Consumer<Property> target){
-    final com.github.gv2011.jsoncore.JsonToken t = json.peek();
+    final JsonToken t = json.peek();
     dispatchTop(json, target, t, "");
   }
 

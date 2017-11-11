@@ -1,68 +1,71 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.github.gv2011</groupId>
-		<artifactId>parent</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <groupId>com.github.gv2011</groupId>
+    <artifactId>parent-gv</artifactId>
+    <version>0.0.5-SNAPSHOT</version>
+  </parent>
 
-	<artifactId>hprops</artifactId>
+  <artifactId>hprops</artifactId>
 
-	<name>Copyright (C) 2016 Vinz (https://github.com/gv2011) Hprops</name>
-	<description>Mapping of JSON to Java properties</description>
-	<url>https://github.com/gv2011/hprops</url>
+  <name>Copyright (C) 2016 Vinz (https://github.com/gv2011) Hprops</name>
+  <description>Mapping of JSON to Java properties</description>
+  <url>https://github.com/gv2011/hprops</url>
 
-	<licenses>
-		<license>
-			<name>MIT License</name>
-			<url>https://opensource.org/licenses/MIT</url>
-		</license>
-	</licenses>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+  </licenses>
 
-	<developers>
-		<developer>
-			<id>gv2011</id>
-			<name>Copyright (C) 2016 Vinz (https://github.com/gv2011)</name>
-			<url>https://github.com/gv2011</url>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <id>gv2011</id>
+      <name>Copyright (C) 2016 Vinz (https://github.com/gv2011)</name>
+      <url>https://github.com/gv2011</url>
+    </developer>
+  </developers>
 
-	<scm>
-		<connection>scm:git:git@github.com:gv2011/hprops.git</connection>
-		<developerConnection>scm:git:git@github.com:gv2011/hprops.git</developerConnection>
-		<url>https://github.com/gv2011/hprops</url>
-		<tag>HEAD</tag>
-	</scm>
+  <scm>
+    <connection>scm:git:git@github.com:gv2011/hprops.git</connection>
+    <developerConnection>scm:git:git@github.com:gv2011/hprops.git</developerConnection>
+    <url>https://github.com/gv2011/hprops</url>
+    <tag>HEAD</tag>
+  </scm>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.github.gv2011</groupId>
-			<artifactId>util</artifactId>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.gv2011</groupId>
+      <artifactId>util</artifactId>
+      <version>0.0.5-SNAPSHOT</version>
+    </dependency>
 
-		<dependency>
-			<groupId>com.github.gv2011</groupId>
-			<artifactId>jsoncore-api</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>com.github.gv2011.jsoncore</groupId>
+      <artifactId>gsoncore</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
 
-		<dependency>
-			<groupId>com.github.gv2011</groupId>
-			<artifactId>jsoncore-imp</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>com.github.gv2011</groupId>
+      <artifactId>util-test</artifactId>
+      <version>0.0.5-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
 
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
 </project>
