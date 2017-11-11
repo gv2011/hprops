@@ -10,24 +10,9 @@
 
   <artifactId>hprops</artifactId>
 
-  <name>Copyright (C) 2016 Vinz (https://github.com/gv2011) Hprops</name>
+  <name>Hprops</name>
   <description>Mapping of JSON to Java properties</description>
   <url>https://github.com/gv2011/hprops</url>
-
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>https://opensource.org/licenses/MIT</url>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <id>gv2011</id>
-      <name>Copyright (C) 2016 Vinz (https://github.com/gv2011)</name>
-      <url>https://github.com/gv2011</url>
-    </developer>
-  </developers>
 
   <scm>
     <connection>scm:git:git@github.com:gv2011/hprops.git</connection>
@@ -54,7 +39,7 @@
       <artifactId>util-test</artifactId>
       <version>0.0.5-SNAPSHOT</version>
     </dependency>
-    
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -67,5 +52,17 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <configuration>
+          <inceptionYear>2016</inceptionYear>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
