@@ -25,57 +25,57 @@ package com.github.gv2011.hprops;
  * THE SOFTWARE.
  * #L%
  */
-import static com.github.gv2011.util.ServiceLoaderUtils.loadService;
 
+import static com.github.gv2011.util.ex.Exceptions.call;
+import static com.github.gv2011.util.ex.Exceptions.run;
+
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.Properties;
 import java.util.function.Consumer;
 
-import com.github.gv2011.gsoncore.JsonFactory;
-import com.github.gv2011.gsoncore.JsonParser;
-import com.github.gv2011.gsoncore.JsonToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 
 
 public class Converter {
 
-  private static final JsonFactory JSON = loadService(JsonFactory.class);
-
 
   public Properties toProperties(final String json){
-    return toProperties(JSON.newJsonParser(new StringReader(json)));
+    return toProperties(new StringReader(json));
   }
 
-  public Properties toProperties(final JsonParser json){
+  public Properties toProperties(final Reader json){
     final Properties result = new Properties();
-    toProperties(json, (p)->result.setProperty(p.key(), p.value()));
+    toProperties(new JsonReader(json), (p)->result.setProperty(p.key(), p.value()));
     return result;
   }
 
-  public void toProperties(final JsonParser json, final Consumer<Property> target){
-    final JsonToken t = json.peek();
+  private void toProperties(final JsonReader json, final Consumer<Property> target){
+    final JsonToken t = call(json::peek);
     dispatchTop(json, target, t, "");
   }
 
-  private void doObject(final JsonParser json, final Consumer<Property> target, final String prefix){
-    json.beginObject();
-    JsonToken t = json.peek();
+  private void doObject(final JsonReader json, final Consumer<Property> target, final String prefix){
+    run(json::beginObject);
+    JsonToken t = call(json::peek);
     while(!t.equals(JsonToken.END_OBJECT)){
-      final String key = (prefix.isEmpty()?"":prefix+".")+encodeKey(json.nextName());
-      t = json.peek();
+      final String key = (prefix.isEmpty()?"":prefix+".")+encodeKey(call(json::nextName));
+      t = call(json::peek);
       dispatch(json, target, t, key);
-      t = json.peek();
+      t = call(json::peek);
     }
-    json.endObject();
+    run(json::endObject);
   }
 
-  private void dispatchTop(final JsonParser json, final Consumer<Property> target, final JsonToken t, final String key){
+  private void dispatchTop(final JsonReader json, final Consumer<Property> target, final JsonToken t, final String key){
     if(t.equals(JsonToken.BEGIN_OBJECT)) doObject(json, target, key);
     else if(t.equals(JsonToken.BEGIN_ARRAY)) doList(json, target, key);
     else throw new IllegalArgumentException(t.toString());
   }
 
   private void dispatch(
-    final JsonParser json, final Consumer<Property> target, final JsonToken t, final String key
+    final JsonReader json, final Consumer<Property> target, final JsonToken t, final String key
   ){
     if(t.equals(JsonToken.BOOLEAN)) write(target, key, getBoolean(json));
     else if(t.equals(JsonToken.STRING)) write(target, key, getString(json));
@@ -98,33 +98,33 @@ public class Converter {
     return key.replace("\\.", ".").replace("\\\\", "\\");
   }
 
-  private void doList(final JsonParser json, final Consumer<Property> target, final String prefix){
-    json.beginArray();
+  private void doList(final JsonReader json, final Consumer<Property> target, final String prefix){
+    run(json::beginArray);
     int i=1;
-    JsonToken t = json.peek();
+    JsonToken t = call(json::peek);
     while(!t.equals(JsonToken.END_ARRAY)){
       final String key = (prefix.isEmpty()?"":prefix+".")+i;
       dispatch(json, target, t, key);
       i++;
-      t = json.peek();
+      t = call(json::peek);
     }
-    json.endArray();
+    run(json::endArray);
   }
 
-  private void getNull(final JsonParser json) {
-    json.nextNull();
+  private void getNull(final JsonReader json) {
+    run(json::nextNull);
   }
 
-  private String getNumber(final JsonParser json){
-    return json.nextString();
+  private String getNumber(final JsonReader json){
+    return call(json::nextString);
   }
 
-  private String getString(final JsonParser json){
-    return json.nextString();
+  private String getString(final JsonReader json){
+    return call(json::nextString);
   }
 
-  private String getBoolean(final JsonParser json){
-    return Boolean.toString(json.nextBoolean());
+  private String getBoolean(final JsonReader json){
+    return Boolean.toString(call(json::nextBoolean));
   }
 
 }
