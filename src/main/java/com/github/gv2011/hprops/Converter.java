@@ -12,10 +12,10 @@ package com.github.gv2011.hprops;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,7 +27,6 @@ package com.github.gv2011.hprops;
  */
 
 import static com.github.gv2011.util.ex.Exceptions.call;
-import static com.github.gv2011.util.ex.Exceptions.run;
 
 import java.io.Reader;
 import java.io.StringReader;
@@ -57,7 +56,7 @@ public class Converter {
   }
 
   private void doObject(final JsonReader json, final Consumer<Property> target, final String prefix){
-    run(json::beginObject);
+    call(json::beginObject);
     JsonToken t = call(json::peek);
     while(!t.equals(JsonToken.END_OBJECT)){
       final String key = (prefix.isEmpty()?"":prefix+".")+encodeKey(call(json::nextName));
@@ -65,7 +64,7 @@ public class Converter {
       dispatch(json, target, t, key);
       t = call(json::peek);
     }
-    run(json::endObject);
+    call(json::endObject);
   }
 
   private void dispatchTop(final JsonReader json, final Consumer<Property> target, final JsonToken t, final String key){
@@ -99,7 +98,7 @@ public class Converter {
   }
 
   private void doList(final JsonReader json, final Consumer<Property> target, final String prefix){
-    run(json::beginArray);
+    call(json::beginArray);
     int i=1;
     JsonToken t = call(json::peek);
     while(!t.equals(JsonToken.END_ARRAY)){
@@ -108,11 +107,11 @@ public class Converter {
       i++;
       t = call(json::peek);
     }
-    run(json::endArray);
+    call(json::endArray);
   }
 
   private void getNull(final JsonReader json) {
-    run(json::nextNull);
+    call(json::nextNull);
   }
 
   private String getNumber(final JsonReader json){
